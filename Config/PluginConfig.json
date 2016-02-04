@@ -1,0 +1,19 @@
+{
+    "Plugin":
+    {
+    },
+    "ShellApplication": {
+        "Name": "ShellAuth",
+        "PublicKey": "-"
+    },
+    "ShellAuthServer": {
+        "Server": "shellauth.local",
+        "Port" : "81",
+        "MethodPaths": {
+            "CreateApplication": "/application/create",
+            "CreateUser": "/user/create",
+            "Login": "/user/login",
+            "Logout": "/user/logout"
+        }
+    }
+}
