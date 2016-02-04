@@ -27,7 +27,20 @@ class ShellAuthHelper implements  IHelper
         );
 
         $callPath = $this->GetApplicationPath('CreateApplication');
+        $this->SendToServer($payLoad, $callPath);
+    }
 
+    public function CreateUser($username, $displayName, $password)
+    {
+        $payLoad = array(
+            'ShellUser' => array(
+                'Username' => $username,
+                'DisplayName' => $displayName,
+                'Password' => $password
+            )
+        );
+
+        $callPath = $this->GetApplicationPath('CreateUser');
         $this->SendToServer($payLoad, $callPath);
     }
 
@@ -63,14 +76,13 @@ class ShellAuthHelper implements  IHelper
 
     protected  function SendToServer($payload, $callPath)
     {
-        // Add the application name
         $data = array(
             'ShellAuth' => array(
                 'Application' => array(
                     'ApplicationName' => $this->ApplicationName
-                )
-            ),
-            'PayLoad' => $payload
+                ),
+                'PayLoad' => $payload
+            )
         );
 
         $data = json_encode($data);
