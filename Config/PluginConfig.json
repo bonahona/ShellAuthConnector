@@ -11,9 +11,14 @@
         "Port" : "81",
         "MethodPaths": {
             "CreateApplication": "/application/create",
+            "GetApplication": "/application/get",
             "CreateUser": "/user/create",
             "Login": "/user/login",
-            "Logout": "/user/logout"
+            "Logout": "/user/logout",
+            "GetUser": "/user/get",
+            "GetLocalUsers": "/user/getlocalusers",
+            "CheckAccessToken": "/user/checkaccesstoken",
+            "SetPrivilegeLevel": "/user/setprivilegelevel"
         }
     }
 }
