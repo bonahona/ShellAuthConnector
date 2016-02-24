@@ -31,6 +31,23 @@ class ShellAuthHelper implements  IHelper
         return $this->SendToServer($payLoad, $callPath);
     }
 
+    public function EditApplication($application)
+    {
+        $payload = array(
+            'ShellApplication' => $application
+        );
+
+        $callPath = $this->GetApplicationPath('EditApplication');
+        return $this->SendToServer($payload, $callPath);
+    }
+
+    public function DeleteApplication($id)
+    {
+        $payLoad = $id;
+        $callPath = $this->GetApplicationPath('DeleteApplication');
+        return $this->SendToServer($payLoad, $callPath);
+    }
+
     public function GetApplication($id = null)
     {
         if($id == null){
@@ -45,17 +62,36 @@ class ShellAuthHelper implements  IHelper
         return $this->SendToServer($payLoad, $callPath);
     }
 
-    public function CreateUser($username, $displayName, $password)
+    public function CreateUser($shellUser)
+    {
+        $payLoad = array(
+            'ShellUser' => $shellUser
+        );
+
+        $callPath = $this->GetApplicationPath('CreateUser');
+        return $this->SendToServer($payLoad, $callPath);
+    }
+
+    public function EditUser($shellUser)
+    {
+        $payLoad = array(
+            'ShellUser' => $shellUser
+        );
+
+        $callPath = $this->GetApplicationPath('EditUser');
+        return $this->SendToServer($payLoad, $callPath);
+    }
+
+    public function ResetPassword($userId, $password)
     {
         $payLoad = array(
             'ShellUser' => array(
-                'Username' => $username,
-                'DisplayName' => $displayName,
+                'Id' => $userId,
                 'Password' => $password
             )
         );
 
-        $callPath = $this->GetApplicationPath('CreateUser');
+        $callPath = $this->GetApplicationPath('ResetPassword');
         return $this->SendToServer($payLoad, $callPath);
     }
 

@@ -11,8 +11,13 @@
         "Port" : "81",
         "MethodPaths": {
             "CreateApplication": "/application/create",
+            "EditApplication": "/application/edit",
+            "DeleteApplication": "/application/delete",
             "GetApplication": "/application/get",
             "CreateUser": "/user/create",
+            "EditUser": "/user/edit",
+            "DeleteUser": "/user/delete",
+            "ResetPassword": "/user/resetpassword",
             "Login": "/user/login",
             "Logout": "/user/logout",
             "GetUser": "/user/get",
