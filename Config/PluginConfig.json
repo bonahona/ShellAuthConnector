@@ -3,12 +3,12 @@
     {
     },
     "ShellApplication": {
-        "Name": "ShellAuth",
+        "Name": "share",
         "PublicKey": "-"
     },
     "ShellAuthServer": {
-        "Server": "shellauth.local",
-        "Port" : "81",
+        "Server": "dummyurl.com",
+        "Port" : "80",
         "MethodPaths": {
             "CreateApplication": "/application/create",
             "EditApplication": "/application/edit",
@@ -23,7 +23,8 @@
             "GetUser": "/user/get",
             "GetLocalUsers": "/user/getlocalusers",
             "CheckAccessToken": "/user/checkaccesstoken",
-            "SetPrivilegeLevel": "/user/setprivilegelevel"
+            "SetPrivilegeLevel": "/user/setprivilegelevel",
+            "GetUserApplicationPrivileges": "/user/GetUserApplicationPrivileges"
         }
     }
 }

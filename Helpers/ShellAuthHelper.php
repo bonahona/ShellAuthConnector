@@ -110,6 +110,14 @@ class ShellAuthHelper implements  IHelper
         if($response['Error'] == 0){
             $this->Controller->Session['SessionToken'] = $response['Data']['AccessToken'];
             $this->Controller->SetLoggedInUser($response['Data']['User']);
+
+            // Check if a local user exists, and if not, create on
+            $userId = $response['Data']['User']['Id'];
+            if(!$this->Controller->Models->LocalUser->Any(array('ShellUserId' => $userId))){
+                $localUser = $this->Controller->Models->LocalUser->Create(array('ShellUserId' => $userId));
+                var_dump($localUser);
+                $localUser->Save();
+            }
         }
 
         return $response;
@@ -179,6 +187,16 @@ class ShellAuthHelper implements  IHelper
         return $this->SendToServer($payLoad, $callPath);
     }
 
+    public function GetUserApplicationPrivileges($userId)
+    {
+        $payLoad = array(
+            'Id' => $userId
+        );
+
+        $callPath = $this->GetApplicationPath('GetUserApplicationPrivileges');
+        return $this->SendToServer($payLoad, $callPath);
+    }
+
     protected function GetApplicationPath($callName)
     {
         if(!array_key_exists($callName, $this->ShellAuthMethodPaths)){
@@ -224,6 +242,7 @@ class ShellAuthHelper implements  IHelper
         }
 
         curl_close($curl);
+
         return json_decode($response, true);
     }
 }
