@@ -27,7 +27,7 @@ class ShellAuthHelper implements  IHelper
     public function GetApplicationLinks()
     {
         $payload = "query{
-	ShellApplications(showInMenu: 1){
+    PublicApplications{
 		Id,
 		MenuName,
 		Url
@@ -42,19 +42,28 @@ class ShellAuthHelper implements  IHelper
         $isActive = (int)isset($application['IsActive']);
         $defaultUserLevel = $application['DefaultUserLevel'];
         $rsaPublicKey = $application['RsaPublicKey'];
+        $showInMenu = (int)isset($application['ShowInMenu']);
+        $menuName = $application['MenuName'];
+        $url = $application['Url'];
 
         $payload = "mutation{
 	ShellApplication(
 		Name: \"$name\",
 		IsActive: $isActive,
 		DefaultUserLevel: $defaultUserLevel,
-		RsaPublicKey: \"$rsaPublicKey\"
+		RsaPublicKey: \"$rsaPublicKey\",
+		ShowInMenu: $showInMenu,
+		MenuName: \"$menuName\",
+		Url: \"$url\"
 	){
 		Id,
 		Name,
 		IsActive,
 		DefaultUserLevel,
-		RsaPublicKey
+		RsaPublicKey,
+		ShowInMenu,
+		MenuName,
+		Url
 	}
 }";
 
@@ -68,6 +77,9 @@ class ShellAuthHelper implements  IHelper
         $isActive = (int)isset($application['IsActive']);
         $defaultUserLevel = $application['DefaultUserLevel'];
         $rsaPublicKey = $application['RsaPublicKey'];
+        $showInMenu = (int)isset($application['ShowInMenu']);
+        $menuName = $application['MenuName'];
+        $url = $application['Url'];
 
         $payload = "mutation{
 	ShellApplication(
@@ -75,13 +87,19 @@ class ShellAuthHelper implements  IHelper
 		Name: \"$name\",
 		IsActive: $isActive,
 		DefaultUserLevel: $defaultUserLevel,
-		RsaPublicKey: \"$rsaPublicKey\"
+		RsaPublicKey: \"$rsaPublicKey\",
+		ShowInMenu: $showInMenu,
+		MenuName: \"$menuName\",
+		Url: \"$url\"
 	){
 		Id,
 		Name,
 		IsActive,
 		DefaultUserLevel,
-		RsaPublicKey
+		RsaPublicKey,
+		ShowInMenu,
+		MenuName,
+		Url
 	}
 }";
 
@@ -115,7 +133,10 @@ class ShellAuthHelper implements  IHelper
 		Name,
 		IsActive,
 		RsaPublicKey,
-		DefaultUserLevel
+		DefaultUserLevel,
+		ShowInMenu,
+		MenuName,
+		Url
 	}
 }";
         return $this->SendToServer($payload);
